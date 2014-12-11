@@ -4,10 +4,17 @@
     <meta charset="UTF-8">
     <title>Adding a Canvas to a Page</title>
     <script>
-        function drawDiagonal() {
-            var canvas = document.getElementById('diagonal');
-            var context = canvas.getContext('2d');
 
+        var context = null;
+
+        function onLoad() {
+            var canvas = document.getElementById('diagonal');
+            context = canvas.getContext('2d');
+
+            drawDiagonal();
+        }
+
+        function drawDiagonal() {
             context.beginPath();
 
             context.moveTo(70, 140);
@@ -16,7 +23,7 @@
             context.stroke();
         }
 
-        window.addEventListener("load", drawDiagonal, true)
+        window.addEventListener("load", onLoad, true)
     </script>
 </head>
 <body>
