@@ -4,16 +4,19 @@
     <meta charset="UTF-8">
     <title>Tree Canopy</title>
     <script>
-        var context2d = null;
+        /**
+         * CanvasRenderingContext2D
+         */
+        var context = null;
 
         var onLoad = function () {
             var canvas = document.getElementById('_canvas');
-            context2d = canvas.getContext('2d');
+            context = canvas.getContext('2d');
 
-            drawTrails(context2d);
+            drawTrails();
         };
 
-        var drawTrails = function(context) {
+        var drawTrails = function() {
             context.save();
             context.translate(130, 250);
 
@@ -23,13 +26,11 @@
             context.restore();
         };
 
-        /**
-         *
-         * @param context CanvasRenderingContext2D
-         */
-        var drawTreeCanopy = function (context) {
+        var drawTreeCanopy = function () {
+            // Begin drawing
             context.beginPath();
 
+            // Drawing left side
             context.moveTo(-25, -50);
             context.lineTo(-10, -80);
             context.lineTo(-20, -80);
@@ -39,13 +40,20 @@
             // Top of the tree
             context.lineTo(0, -140);
 
+            // Drawing right side
             context.lineTo(15, -110);
             context.lineTo(5, -110);
             context.lineTo(20, -80);
             context.lineTo(10, -80);
             context.lineTo(25, -50);
 
+            // Close the ending lines
             context.closePath();
+
+            // Style definition
+            context.lineWidth = 4;
+            context.lineJoin = 'round';
+            context.strokeStyle = '#663300';
         };
 
         window.addEventListener('load', onLoad, true);
