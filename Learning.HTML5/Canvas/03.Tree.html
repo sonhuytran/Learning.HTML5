@@ -22,7 +22,16 @@
 
             drawTreeCanopy(context);
 
+            // Stroke
+            context.lineWidth = 4;
+            context.lineJoin = 'round';
+            context.strokeStyle = '#663300';
             context.stroke();
+
+            // Fill
+            context.fillStyle = '#339900';
+            context.fill();
+
             context.restore();
         };
 
@@ -49,11 +58,6 @@
 
             // Close the ending lines
             context.closePath();
-
-            // Style definition
-            context.lineWidth = 4;
-            context.lineJoin = 'round';
-            context.strokeStyle = '#663300';
         };
 
         window.addEventListener('load', onLoad, true);
