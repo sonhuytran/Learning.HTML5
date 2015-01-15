@@ -2,12 +2,37 @@
  * Created by Huy on 12/01/2015.
  */
 
-// Page elements............................................................
-
+// Global variables.........................................................
+/**
+ * The canvas element
+ */
 var canvas = document.getElementById('canvas'),
-    readout = document.getElementById('readout'),
+    /**
+     * The width of the canvas
+     * @type {Number|number|string|CSSStyleDeclaration.width|*}
+     */
+    cWidth = canvas.width,
+    /**
+     * The height of the canvas
+     * @type {Number|number|string|CSSStyleDeclaration.height|*}
+     */
+    cHeight = canvas.height,
+    /**
+     * The 2d graphics context of the canvas
+     * @type {CanvasRenderingContext2D}
+     */
     canvasCtx = canvas.getContext('2d'),
-    spritesheet = new Image();
+    readout = document.getElementById('readout'),
+    /**
+     * The image to be drawn on the top of the canvas
+     * @type {Image}
+     */
+    spritesheet = new Image(),
+    /**
+     * The image data for saving and restoring the canvas
+     * @type {null}
+     */
+    drawnImage = null;
 
 // Functions................................................................
 
@@ -21,15 +46,14 @@ var canvas = document.getElementById('canvas'),
 function windowToCanvas(canvas, x, y) {
     var bbox = canvas.getBoundingClientRect();
     return {
-        x: x - bbox.left * (canvas.width / bbox.width),
-        y: y - bbox.top * (canvas.height / bbox.height)
+        x: x - bbox.left * (cWidth / bbox.width),
+        y: y - bbox.top * (cHeight / bbox.height)
     }
 }
 
 function drawBackground() {
     var VERTICAL_LINE_SPACING = 12,
-        cWidth = canvas.width,
-        cHeight = canvas.height;
+        tempHeight = cHeight;
 
     canvasCtx.save();
 
@@ -39,13 +63,13 @@ function drawBackground() {
     canvasCtx.lineWidth = 0.5;
 
     // Drawings
-    while (cHeight > VERTICAL_LINE_SPACING * 4) {
+    while (tempHeight > VERTICAL_LINE_SPACING * 4) {
         canvasCtx.beginPath();
-        canvasCtx.moveTo(0, cHeight);
-        canvasCtx.lineTo(cWidth, cHeight);
+        canvasCtx.moveTo(0, tempHeight);
+        canvasCtx.lineTo(cWidth, tempHeight);
         canvasCtx.stroke();
 
-        cHeight -= VERTICAL_LINE_SPACING;
+        tempHeight -= VERTICAL_LINE_SPACING;
     }
 
     canvasCtx.restore();
@@ -54,14 +78,14 @@ function drawBackground() {
 function drawVerticalLine(x) {
     canvasCtx.beginPath();
     canvasCtx.moveTo(x + 0.5, 0);
-    canvasCtx.lineTo(x + 0.5, canvas.height);
+    canvasCtx.lineTo(x + 0.5, cHeight);
     canvasCtx.stroke();
 }
 
 function drawHorizontalLine(y) {
     canvasCtx.beginPath();
     canvasCtx.moveTo(0, y + 0.5);
-    canvasCtx.lineTo(canvas.width, y + 0.5);
+    canvasCtx.lineTo(cWidth, y + 0.5);
     canvasCtx.stroke();
 }
 
@@ -84,15 +108,43 @@ function updateReadout(x, y) {
     readout.innerText = '(' + x.toFixed(0) + ', ' + y.toFixed(0) + ')';
 }
 
+/**
+ * Save the currently image data of the canvas
+ */
+function saveDrawingSurface() {
+    drawnImage = canvasCtx.getImageData(0, 0, cWidth, cHeight);
+}
+
+/**
+ * Restore the saved image data of the canvas
+ */
+function restoreDrawingSurface() {
+    canvasCtx.putImageData(drawnImage, 0, 0);
+}
+
 // Event Handlers...........................................................
+
+var _dragging = false;
 
 canvas.onmousemove = function (event) {
     var loc = windowToCanvas(canvas, event.clientX, event.clientY);
 
-    drawBackground();
-    drawSpritesheet();
-    drawGuidelines(loc.x, loc.y);
-    updateReadout(loc.x, loc.y);
+    if (_dragging) {
+        drawBackground();
+        drawSpritesheet();
+        drawGuidelines(loc.x, loc.y);
+        updateReadout(loc.x, loc.y);
+    }
+};
+
+canvas.onmousedown = function (event) {
+    saveDrawingSurface();
+    _dragging = true;
+};
+
+canvas.onmouseup = function (event) {
+    restoreDrawingSurface();
+    _dragging = false;
 };
 
 // Initialization...........................................................
