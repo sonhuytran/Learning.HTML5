@@ -5,6 +5,7 @@
 // Global variables.........................................................
 /**
  * The canvas element
+ * @type {HTMLCanvasElement}
  */
 var canvas = document.getElementById('canvas'),
     /**
