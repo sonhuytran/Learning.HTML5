@@ -10,29 +10,42 @@
  */
 var canvas = document.getElementById("canvas"),
     /**
-     * The width of the canvas element
+     * The width of the canvas element.
      * @type {number}
      */
     cWidth = canvas.width,
     /**
-     * The height of the canvas element
+     * The height of the canvas element.
      * @type {number}
      */
     cHeight = canvas.height,
     /**
-     * The graphics context of the canvas element
+     * The graphics context of the canvas element.
      * @type {CanvasRenderingContext2D}
      */
     cCtx = canvas.getContext("2d"),
     buttonStart = document.getElementById("buttonStart"),
     glassPane = document.getElementById("glasspane"),
+    /**
+     * A value indicating that the animation is
+     * currently paused (true) or running (false).
+     * @type {boolean}
+     */
     paused = false,
+    /**
+     * List of all circles data object.
+     * @type {Array}
+     */
     circles = [];
 
 // endregion
 
 // region Functions.............................................................
 
+/**
+ * Moves a circle to its new position, according to its velocity vector.
+ * @param circle the circle data object to be moved
+ */
 function adjustPosition(circle) {
     if (circle.x + circle.radius + circle.velocityX > cWidth
         || circle.x - circle.radius + circle.velocityX < 0) {
@@ -48,6 +61,13 @@ function adjustPosition(circle) {
     circle.y += circle.velocityY;
 }
 
+/**
+ * Draws the background grid
+ * @param context the graphics context on which the grid is drawn
+ * @param color the grid line color
+ * @param stepx the width of each cell
+ * @param stepy the height of each cell
+ */
 function drawGrid(context, color, stepx, stepy) {
     context.strokeStyle = color;
     context.lineWidth = 0.5;
