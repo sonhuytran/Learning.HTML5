@@ -1,0 +1,23 @@
+body {
+    background: rgba(100, 145, 250, 0.3);
+}
+
+#controls {
+    margin: 20px 0px 20px 20px;
+}
+
+#divRubberband {
+    position: absolute;
+    border: 3px solid yellow;
+    cursor: crosshair;
+    display: none;
+}
+
+#canvas {
+    margin-left: 20px;
+    margin-right: 0;
+    margin-bottom: 20px;
+    border: thin solid #aaaaaa;
+    padding: 0;
+    cursor: crosshair;
+}
