@@ -7,21 +7,52 @@
 </head>
 <body>
 
-<canvas id="canvas1" width="300" height="300">
-    Canvas not supported
-</canvas>
+<div style="float: left;">
+    <h2>Drawing Rectangles</h2>
+    <canvas id="canvas0" width="300" height="300">
+        Canvas not supported
+    </canvas>
+</div>
 
-<canvas id="canvas2" width="300" height="300">
-    Canvas not supported
-</canvas>
+<div style="float: left;">
+    <h2>Colors and Transparency</h2>
+    <canvas id="canvas1" width="300" height="300">
+        Canvas not supported
+    </canvas>
+</div>
 
-<canvas id="canvas3" width="300" height="300">
-    Canvas not supported
-</canvas>
+<div style="float: left;">
+    <h2>Linear Gradients</h2>
+    <canvas id="canvas2" width="300" height="300">
+        Canvas not supported
+    </canvas>
+</div>
 
-<canvas id="canvas4" width="300" height="300">
-    Canvas not supported
-</canvas>
+<div style="float: left;">
+    <h2>Radial Gradients</h2>
+    <canvas id="canvas3" width="300" height="300">
+        Canvas not supported
+    </canvas>
+</div>
+
+<div style="float: left;clear: left;">
+    <h2>Patterns</h2>
+
+    <div id="radios">
+        <input type="radio" name="repeatRadio" id="rbtnRepeat" checked/>
+        <label for="rbtnRepeat">Repeat</label>
+        <input type="radio" name="repeatRadio" id="rbtnRepeatX"/>
+        <label for="rbtnRepeatX">Repeat-x</label>
+        <input type="radio" name="repeatRadio" id="rbtnRepeatY"/>
+        <label for="rbtnRepeatY">Repeat-y</label>
+        <input type="radio" name="repeatRadio" id="rbtnRepeatNo"/>
+        <label for="rbtnRepeatNo">No repeat</label>
+    </div>
+
+    <canvas id="canvas4" width="300" height="300">
+        Canvas not supported
+    </canvas>
+</div>
 
 <script src="basic-drawings.js"></script>
 

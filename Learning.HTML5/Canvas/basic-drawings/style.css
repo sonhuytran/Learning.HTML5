@@ -8,3 +8,11 @@ canvas {
     background: #ffffff;
     border: thin solid #aaaaaa;
 }
+
+h2 {
+    font-family: Constantia, serif;
+    color: seagreen;
+    width: 100%;
+    margin-left: 10px;
+    text-align: center;
+}
