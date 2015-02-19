@@ -1,0 +1,51 @@
+#game_container {
+    width: 640px;
+    height: 480px;
+    background: url(../images/splashscreen.png);
+    border: 1px solid black;
+}
+
+.game_layer {
+    width: 640px;
+    height: 480px;
+    position: absolute;
+    display: none;
+}
+
+#game_start_screen {
+    padding-top: 250px;
+    text-align: center;
+}
+
+#game_start_screen img {
+    margin: 10px;
+    cursor: pointer;
+}
+
+#level_select_screen {
+    padding: 150px 0 0 50px;
+}
+
+#level_select_screen input {
+    background: url("../images/icons/level.png") no-repeat;
+    border: 0;
+    color: yellow;
+    cursor: pointer;
+    font-size: 20px;
+    margin: 20px;
+    width: 64px;
+    height: 64px;
+}
+
+#loading_screen {
+    background: rgba(100, 100, 100, 0.3);
+}
+
+#loading_message {
+    background: url("../images/loader.gif") no-repeat center;
+    margin-top: 400px;
+    text-align: center;
+    height: 48px;
+    color: white;
+    font: 12px Arial;
+}
